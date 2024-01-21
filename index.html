@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <title>Better us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Quicksand:wght@500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Open Sans', sans-serif;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(#0cc9cf, #075579, #001e22);
+      background-size: 100% 100vh;
+    }
+
+    input {
+      height: 15px;
+      width: 15px;
+    }
+
+    label {
+      font-size: 15px;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" style="font-size: 30px;">Better Us </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="confession.html">Confession </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="conclusions.html">Conclusions </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="resources.html">Resources </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="alert alert-primary" role="alert">
+    Section for your checklist, check the checkbox if you've completed it
+  </div>
+
+  <div class="accordion" id="accordionExample">
+    <div class="card ">
+      <div class="card-header " id="headingOne">
+        <h2 class="mb-0">
+          <div class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            Liza's To-dos
+          </div>
+        </h2>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <input type="checkbox" onclick="update('l_1', 'Liza', 'Advanced Machine Learning')" name="l-1" id="l_1">
+          <label for="l-1">Advanced Machine Learning</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_2', 'Liza', 'Big Data Technology')" name="l-2" id="l_2">
+          <label for="l-2">Big Data Technology</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_3', 'Liza', 'CI and CD tools')" name="l-3" id="l_3">
+          <label for="l-3">CI and CD tools</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_4', 'Liza', 'Calculus')" name="l-4" id="l_4">
+          <label for="l-4">Calculus</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_5', 'Liza', 'Cloud Deployment Techniques')" name="l-5" id="l_5">
+          <label for="l-5">Cloud Deployment Techniques</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_6', 'Liza', 'Communication and Collaboration skills')" name="l-6"
+            id="l_6">
+          <label for="l-6">Communication and Collaboration skills</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_7', 'Liza', 'Data Processing')" name="l-7" id="l_7">
+          <label for="l-7">Data Processing</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_8', 'Liza', 'Data Structure')" name="l-8" id="l_8">
+          <label for="l-8">Data Structure</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_9', 'Liza', 'Data Wrangling')" name="l-9" id="l_9">
+          <label for="l-9">Data Wrangling</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_10', 'Liza', 'Linear Algebra')" name="l-10" id="l_10">
+          <label for="l-10">Linear Algebra</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_11', 'Liza', 'Machine Learning Basics')" name="l-11" id="l_11">
+          <label for="l-11">Machine Learning Basics</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_12', 'Liza', 'Probability')" name="l-12" id="l_12">
+          <label for="l-12">Probability</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_13', 'Liza', 'Python')" name="l-13" id="l_13">
+          <label for="l-13">Python</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_14', 'Liza', 'Software Engineering Principles')" name="l-14"
+            id="l_14">
+          <label for="l-14">Software Engineering Principles</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_15', 'Liza', 'Statistics')" name="l-15" id="l_15">
+          <label for="l-15">Statistics</label>
+
+          <br>
+          <input type="checkbox" onclick="update('l_16', 'Liza', 'Version Control')" name="l-16" id="l_16">
+          <label for="l-16">Version Control</label>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <div class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Rishav's To-dos
+          </div>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+
+          <input type="checkbox" onclick="update('r_1', 'Rishav', 'Advanced Machine Learning')" name="r-1" id="r_1">
+          <label for="r-1">Advanced Machine Learning</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_2', 'Rishav', 'Big Data Technology')" name="r-2" id="r_2">
+          <label for="r-2">Big Data Technology</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_3', 'Rishav', 'CI and CD tools')" name="r-3" id="r_3">
+          <label for="r-3">CI and CD tools</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_4', 'Rishav', 'Calculus')" name="r-4" id="r_4">
+          <label for="r-4">Calculus</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_5', 'Rishav', 'Cloud Deployment Techniques')" name="r-5" id="r_5">
+          <label for="r-5">Cloud Deployment Techniques</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_6', 'Rishav', 'Communication and Collaboration skills')" name="r-6"
+            id="r_6">
+          <label for="r-6">Communication and Collaboration skills</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_7', 'Rishav', 'Data Processing')" name="r-7" id="r_7">
+          <label for="r-7">Data Processing</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_8', 'Rishav', 'Data Structure')" name="r-8" id="r_8">
+          <label for="r-8">Data Structure</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_9', 'Rishav', 'Data Wrangling')" name="r-9" id="r_9">
+          <label for="r-9">Data Wrangling</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_10', 'Rishav', 'Linear Algebra')" name="r-10" id="r_10">
+          <label for="r-10">Linear Algebra</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_11', 'Rishav', 'Machine Learning Basics')" name="r-11" id="r_11">
+          <label for="r-11">Machine Learning Basics</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_12', 'Rishav', 'Probability')" name="r-12" id="r_12">
+          <label for="r-12">Probability</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_13', 'Rishav', 'Python')" name="r-13" id="r_13">
+          <label for="r-13">Python</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_14', 'Rishav', 'Software Engineering Principles')" name="r-14"
+            id="r_14">
+          <label for="r-14">Software Engineering Principles</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_15', 'Rishav', 'Statistics')" name="r-15" id="r_15">
+          <label for="r-15">Statistics</label>
+
+          <br>
+          <input type="checkbox" onclick="update('r_16', 'Rishav', 'Version Control')" name="r-16" id="r_16">
+          <label for="r-16">Version Control</label>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+
+  <script>
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyCEnJbb3rZYsvEzAnDOcwKkEoBR74Ke3co",
+      authDomain: "named-haven-406514.firebaseapp.com",
+      databaseURL: "https://named-haven-406514-default-rtdb.firebaseio.com"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function __init__(id, username, todo) {
+      let dataRef = firebase.database().ref(`/${username}/`);
+
+      dataRef.on("value", function (snapshot) {
+        document.getElementById(id).checked = snapshot.val()[todo];
+      });
+    }
+
+    function createDictFromArgument(todo, val) {
+      const dict = {};
+
+      dict[todo] = val;
+      return dict;
+    }
+
+    function update(id, username, todo) {
+      let dataRef = firebase.database().ref(`/${username}/`);
+
+      var r = document.getElementById(id).checked;
+      if (r) {
+        dataRef.update(createDictFromArgument(todo, r)); console.log(1);
+      } else {
+        dataRef.update(createDictFromArgument(todo, r)); console.log(0);
+      }
+    }
+
+    let r_ids = ['r_1', 'r_2', 'r_3', 'r_4', 'r_5', 'r_6', 'r_7', 'r_8', 'r_9', 'r_10', 'r_11', 'r_12', 'r_13', 'r_14', 'r_15', 'r_16'];
+    let l_ids = ['l_1', 'l_2', 'l_3', 'l_4', 'l_5', 'l_6', 'l_7', 'l_8', 'l_9', 'l_10', 'l_11', 'l_12', 'l_13', 'l_14', 'l_15', 'l_16'];
+    let rl_todos = ['Advanced Machine Learning', 'Big Data Technology', 'CI and CD tools', 'Calculus', 'Cloud Deployment Techniques', 'Communication and Collaboration skills', 'Data Processing', 'Data Structure', 'Data Wrangling', 'Linear Algebra', 'Machine Learning Basics', 'Probability', 'Python', 'Software Engineering Principles', 'Statistics', 'Version Control'];
+
+    for (let i in r_ids) {
+      __init__(r_ids[i], 'Rishav', rl_todos[i]);
+    }
+
+    for (let i in l_ids) {
+      __init__(l_ids[i], 'Liza', rl_todos[i])
+    }
+  </script>
+</body>
+
+</html>

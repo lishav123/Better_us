@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <title>Better us</title>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" style="font-size: 30px;">Better Us </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="confession.html">Confession </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Conclusions </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="resources.html">Resources </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <br>
+
+  <h2>Liza's Progress</h2>
+  <div class="progress">
+    <div class="progress-bar" id="liz" role="progressbar" style="width: 0%;" aria-valuemin="0"
+      aria-valuemax="100">0%</div>
+  </div>
+
+  <br>
+
+  <h2>Rishav's Progress</h2>
+  <div class="progress">
+    <div class="progress-bar" id="ris" role="progressbar" style="width: 0%;"  aria-valuemin="0"
+      aria-valuemax="100">0%</div>
+  </div>
+
+  <br>
+  <h3>Resources</h3>
+  <ul>
+    <li><a href="https://www.edx.org/" target="_blank">EdX</a></li>
+    <li><a href="https://www.khanacademy.org/" target="_blank">KhanAcadmy</a></li>
+    <li><a href="https://www.coursera.org/" target="_blank">Coursera</a></li>
+    <li><a href="https://ocw.mit.edu/" target="_blank">MITOCW</a></li>
+    <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+    <li><a href="https://www.datacamp.com/" target="_blank">DataCamp</a></li>
+  </ul>
+
+  <div style="color: red; padding: 10px;">NOTE: these are some common and popular resources for learning Maths, Computer Science etc. there are many more resources, if you wanna share it please share it on confession section. Thank you</div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCEnJbb3rZYsvEzAnDOcwKkEoBR74Ke3co",
+      authDomain: "named-haven-406514.firebaseapp.com",
+      databaseURL: "https://named-haven-406514-default-rtdb.firebaseio.com"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    async function __init__(username, todos) {
+      let dataRef = firebase.database().ref(`/${username}/`);
+
+      const promises = todos.map(todo => dataRef.child(todo).once("value"));
+      const snapshotData = await Promise.all(promises);
+      const arr = snapshotData.map(snapshot => snapshot.val());
+      return arr;
+    }
+
+    var rl_todos = ['Advanced Machine Learning', 'Big Data Technology', 'CI and CD tools', 'Calculus', 'Cloud Deployment Techniques', 'Communication and Collaboration skills', 'Data Processing', 'Data Structure', 'Data Wrangling', 'Linear Algebra', 'Machine Learning Basics', 'Probability', 'Python', 'Software Engineering Principles', 'Statistics', 'Version Control'];
+    var r_data = __init__('Rishav', rl_todos)
+    var l_data = __init__('Liza', rl_todos)
+
+    var ct = 0;
+    __init__('Rishav', rl_todos)
+      .then(r_data => {
+        ct = r_data.filter(Boolean).length; // Count truthy values
+        let rhv = document.getElementById("ris")
+        rhv.textContent = (ct / 16) * 100 + "%";
+        rhv.style.width = (ct / 16) * 100 + "%";
+      });
+
+    var lt = 0
+    __init__('Liza', rl_todos)
+      .then(l_data => {
+        lt = l_data.filter(Boolean).length; // Count truthy values
+        let lhv = document.getElementById("liz")
+        liz.textContent = (lt / 16) * 100 + "%";
+        liz.style.width = (lt / 16) * 100 + "%";
+      });
+ </script>
+
+</body>
+
+</html>

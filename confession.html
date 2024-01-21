@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
+  <style>
+    body {
+      background-color: #252525;
+    }
+    .division {
+      overflow-y: scroll;
+      border: 2px solid black;
+      height: 70vh;
+      background-color: black;
+    }
+    p {
+      margin: 10px;
+      background-color: rgb(16, 83, 83);
+      color: white;
+      padding: 10px;
+      border: 2px solid rgb(3, 58, 58);
+      border-radius: 10px 10px 0 0;
+    }
+
+  </style>
+  <title>Better us</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" style="font-size: 30px;">Better Us </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Confession </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="conclusions.html">Conclusions </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="resources.html">Resources </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="sendButton">Send</span>
+    </div>
+    <textarea class="form-control" id="messageInput"aria-label="With textarea"></textarea>
+  </div>
+
+  <br>
+  <div class="division" id="messageList"></div>
+
+  <script>
+    // Your Firebase configuration details will go here
+    // (See "Firebase Setup" section below)
+    // Initialize Firebase with your configuration details
+    // (Replace with your actual configuration)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEnJbb3rZYsvEzAnDOcwKkEoBR74Ke3co",
+      authDomain: "named-haven-406514.firebaseapp.com",
+      databaseURL: "https://named-haven-406514-default-rtdb.firebaseio.com"
+
+      // Your Firebase configuration
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Reference to the messages list in Firebase Realtime Database
+    const messagesRef = database.ref('/messages/');
+
+    // Function to handle send button click
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+
+      // Push the message to Firebase
+      messagesRef.push(message)
+        .then(() => {
+          // Clear the input field
+          messageInput.value = '';
+        })
+        .catch((error) => {
+          console.error('Error sending message:', error);
+        });
+    });
+
+    // Function to retrieve and display messages
+    messagesRef.on('value', (snapshot) => {
+      const messagesList = document.getElementById('messageList');
+      messagesList.innerHTML = ''; // Clear the list before displaying new messages
+
+      snapshot.forEach((childSnapshot) => {
+        const message = childSnapshot.val();
+        const li = document.createElement('p');
+        li.textContent = message;
+        messagesList.appendChild(li);
+      });
+    });
+
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
